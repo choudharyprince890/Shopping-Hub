@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+{% load static %}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col">
+            <div class="image-container">
+                <img src="{% static 'images/banner.jpg' %}" class="img-fluid" alt="Responsive Image">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="container mt-4">
+    <div class="row">
+        <!-- Left side div -->
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-12">
+                    <form enctype="multipart/form-data" action="{% url 'designclothes' %}" method="POST">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="textarea" class="form-label">Be creative:</label>
+                            <textarea id="textarea" name="prompt" class="form-control" rows="4"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <h5 class="font-weight-bold">These are few examples:-</h5>
+                <div class="col-md-12">
+                    <span class="badge badge-secondary mb-1">Blue colour pokemon hoodie by martin valen</span>
+                    <span class="badge badge-secondary mb-1">Blue colour hoodie by martin valen</span>
+                    <span class="badge badge-secondary mb-1">Black Colour Hoodie with Red Mickey Mouse printed on chest</span>
+                    <span class="badge badge-secondary mb-1">Pink hoodie with White colour arms by martin valen</span>
+                    <span class="badge badge-secondary mb-1">White colour hoodie with black arms</span>                </div>
+            </div>
+            {% if key %}
+            <form enctype="multipart/form-data" action="{% url 'designclothes' %}" method="GET">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-success">Placce Order</button>
+            </form>
+            {% endif %}
+        </div>
+        {% if key %}
+        <div class="col-md-6">
+            <img src="{% static 'generated/' %}{{key}}.jpg" class="img-fluid" alt="Responsive Image">
+        {% endif %}
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

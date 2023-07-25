@@ -1,0 +1,145 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+
+<title>Upload Image Example</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <style>
+    .center-div {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+    .card {
+      width: 400px;
+      border: none;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .card-title {
+      font-size: 20px;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    .btn-primary {
+      width: 100%;
+    }
+    .uploaded-image {
+      max-width: 300px;
+      max-height: 280px;
+      margin-top: 10px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+  </style>
+</head>
+
+
+
+
+<div class="container">
+  <div class="row align-items-start">
+    <div class="col text-center">
+      <h1 class="display-4"><strong>Find Product</strong></h1>
+      <p class="lead">Upload Image to find the product that you are looking for</p>
+    </div>
+  </div>
+</div>
+
+
+<div>
+  <div class="container">
+    <div class="center-div">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Upload Image</h5>
+
+          <form enctype="multipart/form-data" action="{% url 'find_product' %}" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+              <label for="uploadImage">Select an image:</label>
+              <input type="file" class="form-control-file" id="uploadImage" accept="image/*" name="f_image">
+            </div>
+            <button type="submit" class="btn btn-primary">Upload</button>
+          </form>
+
+          <div class="text-center">
+            <img src="#" id="uploadedImage" class="uploaded-image d-none" alt="Uploaded Image">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div>
+
+  <div id="products" class="col-lg-9 mx-auto">
+    <div class="row mx-auto">
+
+      {% for product in products %}
+      <div class="card mx-auto mb-3" style="width: 18rem;">
+        <img class="card-img-top" src="{{product.image_url}}" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">{{product.name}}</h5>
+          <p class="card-text">{{product.price}}</p>
+          <p class="card-text">{{product.description}}</p>
+
+
+
+          <form action="/#{{product.id}}" method="POST" class="btn-block">
+            {% csrf_token %}
+            <input type="text" name="product" hidden value="{{product.id}}">
+            <input href="#" class="btn float-right border btn-light form-control" type="submit" value="Add To cart">
+          </form>
+
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+</div>
+
+
+
+<!-- Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<script>
+// Function to display the uploaded image
+function displayImage(input) {
+    if (input.files && input.files[0]) {
+    var reader = new FileReader();
+
+    reader.onload = function(e) {
+        $('#uploadedImage').attr('src', e.target.result).removeClass('d-none');
+    }
+
+    reader.readAsDataURL(input.files[0]);
+    }
+}
+
+// Event listener for the file input change event
+$('#uploadImage').on('change', function() {
+    displayImage(this);
+});
+</script>
+
+
+
+
+
+
+{% endblock %}
