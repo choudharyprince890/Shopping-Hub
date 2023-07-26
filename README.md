@@ -11,7 +11,7 @@
 
 <img alt="Awesome GitHub Profile Readme" src="shopping_hub/uploads/gif for git.gif"> </img>
 
-- [Click Here to watch the full video](https://youtu.be/inn7iNcB7U4) - *Youtube*
+- [Click Here to watch the full video](https://youtu.be/TcPWod_mKJY) - *Youtube*
 
 #### Description
 Shopping Hub, an advanced and innovative ecommerce platform, With cutting-edge technologies like Machine learning, Deep learning, Generative AI and computer vision.
