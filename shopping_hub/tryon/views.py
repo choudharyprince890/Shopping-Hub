@@ -42,12 +42,14 @@ def tryon_shirt(shirtPath):
     # to running a wabcam
     while cap.isOpened():
         success, img = cap.read()
-        img = detector.findPose(img)
-        # putting a boundingbox areound the center
+        img = detector.findPose(img, draw=False)
+        # img = pose.pose_detector.drawPose(img, None)
+
+        # draw a border around the pose
         lmList, bboxInfo = detector.findPosition(img, bboxWithHands=False, draw=False)
         if lmList:
-                lm11 = lmList[11][1:3]
-                lm12 = lmList[12][1:3]
+                lm11 = lmList[11][1:3] # right shoulder x,y cordinates
+                lm12 = lmList[12][1:3] # left shoulder x,y cordinates
 
                 imgShirt = cv2.imread(shirtPath,cv2.IMREAD_UNCHANGED)
                 weidthOfShort = int((lm11[0]-lm12[0])*fixedRatio)

@@ -14,14 +14,15 @@
 - [Click Here to watch the full video](https://youtu.be/inn7iNcB7U4) - *Youtube*
 
 #### Description
-Food Hub is an innovative project that leverages cutting-edge machine learning, deep learning and transformer techniques to provide a comprehensive food-related experience to users. 
+Shopping Hub, an advanced and innovative ecommerce platform, With cutting-edge technologies like Machine learning, Deep learning, Generative AI and computer vision.
 
-**The system combines the power of:-**
-- CNN (Convolutional Neural Network) to identify food images
-- Hyperparameter-Tuned BERT (Bidirectional Encoder Representations from Transformers) to generate recipes from given ingredients
-- Random Forest to predict the Dish
-- cosine similarity to show the related recommendations.
-
+**Features of the project:-**
+- <ins> Image-Based Product Search with Deep & Machine learning (ResNet50 and nearest neighbor) </ins> <br>
+   Combination of ResNet50 and nearest neighbor algorithm ensures accurate product recognition based on images, bringing you visually       similar results 
+- <ins> Try-On Feature with Computer Vision (MediaPipe) </ins> <br>
+   Powered by the popular MediaPipe library, Experience the convenience of virtual try-on with computer vision
+- <ins> Design Your Own Clothes with Generative AI (Stable Diffusion) </ins> <br>
+   Thanks to the open source community for stable diffusion model, "Design Your Own Clothes" feature use stable diffusion model which is      fine-tuned on dataset of hoodies by martin valen
 
 <!-- Built With -->
 ## Built With
