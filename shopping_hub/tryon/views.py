@@ -37,16 +37,18 @@ def tryon_shirt(shirtPath):
     # webcam video capture
     cap = cv2.VideoCapture(0)
     detector = PoseDetector()
-    fixedRatio = 262/190 # width of shirt / width of shoulder points(11-12)
+    fixedRatio = 262/190 # already checked shirt width and shoulder point distance    then calculated ratio
     shirtRatioHeightWidth = 581 / 440 # dimension of shirt image
     # to running a wabcam
     while cap.isOpened():
         success, img = cap.read()
+        # find pose on image
         img = detector.findPose(img, draw=False)
         # img = pose.pose_detector.drawPose(img, None)
 
-        # draw a border around the pose
+        # give landmark points, draw a border around the pose
         lmList, bboxInfo = detector.findPosition(img, bboxWithHands=False, draw=False)
+        # if pose detected
         if lmList:
                 lm11 = lmList[11][1:3] # right shoulder x,y cordinates
                 lm12 = lmList[12][1:3] # left shoulder x,y cordinates
@@ -58,6 +60,7 @@ def tryon_shirt(shirtPath):
                 currentScale =  (lm11[0] - lm12[0]) / 190
                 offset = int(44*currentScale), int(48*currentScale)
                 try :
+                    # overlay shirt on body image
                     img = cvzone.overlayPNG(img, imgShirt, (lm12[0]-offset[0], lm12[1]-offset[1]))
                 except:
                     pass
